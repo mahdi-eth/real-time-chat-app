@@ -43,7 +43,7 @@ This application consists of three main components:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/real-time-chat-app.git
+   git clone https://github.com/mahdi-eth/real-time-chat-app.git
    cd real-time-chat-app
    ```
 

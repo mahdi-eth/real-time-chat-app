@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+
+  websocket-service:
+    build:
+      context: ./websocket-service
+      dockerfile: Dockerfile
+    env_file:
+      - websocket-service/.env
+    container_name: websocket-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+
+  history-storage-service:
+    build:
+      context: ./history-storage-service
+      dockerfile: Dockerfile
+    env_file:
+      - history-storage-service/.env
+    container_name: history-storage-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
